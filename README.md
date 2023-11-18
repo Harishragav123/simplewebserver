@@ -21,10 +21,38 @@ Serving the HTML pages.
 Testing the webserver.
 
 ## PROGRAM:
-
-
+```
+from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>My webserver</title>
+</head>
+<body>
+<h1><u>Top 5 Revenue Generating Companies</u><h1>
+<ul>
+<li>Redmi</li>
+<li>Amazon</li>
+<li>Microsoft</li>
+<li>Samsung</li>
+<li>Google</li>
+</body>
+</html>
+"""
+class myhandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("request received")
+        self.send_response(200)
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+server_address = ('',8000)
+httpd = HTTPServer(server_address,myhandler)
+print("my webserver is running...")
+httpd.serve_forever()
+```
 ## OUTPUT:
-
-
+![Screenshot 2023-11-18 100055](https://github.com/Harishragav123/simplewebserver/assets/135584731/e6d16a76-efcb-4c24-a86d-b6c368b03a77)
 ## RESULT:
 The program for implementing simple webserver is executed successfully.
